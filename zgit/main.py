@@ -56,8 +56,9 @@ def main():
         if writeFile:
             print("writing file")
             compressed_contents = zlib.compress(store_file)
+            blob_directory = os.path.join(os.getcwd(),".git","objects",hash[:2])
             blob_path = os.path.join(os.getcwd(),".git","objects",hash[:2],hash[2:])
-            os.makedirs(blob_path,exist_ok=True)
+            os.makedirs(blob_directory,exist_ok=True)
             with open(blob_path,"wb") as blob_file:
                 #failing due to everything on pc being locked in readonly I think
                 blob_file.write(compressed_contents)
